@@ -47,7 +47,7 @@ public class QuestionEditRequest implements Serializable {
     /**
      * 判题配置（json对象）
      */
-    private List<JudgeConfig> judgeConfig;
+    private JudgeConfig judgeConfig;
 
 
     private static final long serialVersionUID = 1L;

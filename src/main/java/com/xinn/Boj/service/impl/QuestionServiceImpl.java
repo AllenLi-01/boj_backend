@@ -63,7 +63,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
 
         // 处于创建时，以下参数不能为空
         if (add) {
-            ThrowUtils.throwIf(StringUtils.isAnyBlank(title, content, tags), ErrorCode.PARAMS_ERROR);
+            ThrowUtils.throwIf(StringUtils.isAnyBlank(title, content, tags,judgeConfig,judgeCase), ErrorCode.PARAMS_ERROR);
         }
         // 有参数则校验
         if (StringUtils.isNotBlank(title) && title.length() > 80) {
@@ -87,8 +87,6 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
      * 获取查询包装类
      * 根据前端传入的参数创建对应的Mybatis plus 查询类QueryWrapper
      *
-     * @param questionQueryRequest
-     * @return
      */
     @Override
     public QueryWrapper<Question> getQueryWrapper(QuestionQueryRequest questionQueryRequest) {

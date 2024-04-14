@@ -46,13 +46,8 @@ public class QuestionAddRequest implements Serializable {
     /**
      * 判题配置（json对象）
      */
-    private List<JudgeConfig> judgeConfig;
+    private JudgeConfig judgeConfig;
 
-
-    /**
-     * 创建者 id
-     */
-    private Long userId;
 
 
 

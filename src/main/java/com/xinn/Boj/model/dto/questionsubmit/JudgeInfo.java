@@ -1,11 +1,14 @@
 package com.xinn.Boj.model.dto.questionsubmit;
 
+import lombok.Data;
+
 /**
  * 判题信息
  *
  * @author allen
  * @date 2024/03/23
  */
+@Data
 public class JudgeInfo {
     /**
      * 程序执行信息

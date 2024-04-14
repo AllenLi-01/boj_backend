@@ -10,10 +10,8 @@ import com.xinn.Boj.common.ResultUtils;
 import com.xinn.Boj.constant.UserConstant;
 import com.xinn.Boj.exception.BusinessException;
 import com.xinn.Boj.exception.ThrowUtils;
-import com.xinn.Boj.model.dto.question.QuestionAddRequest;
-import com.xinn.Boj.model.dto.question.QuestionEditRequest;
-import com.xinn.Boj.model.dto.question.QuestionQueryRequest;
-import com.xinn.Boj.model.dto.question.QuestionUpdateRequest;
+import com.xinn.Boj.model.dto.question.*;
+import com.xinn.Boj.model.dto.user.UserQueryRequest;
 import com.xinn.Boj.model.entity.Question;
 import com.xinn.Boj.model.entity.User;
 import com.xinn.Boj.model.vo.QuestionVO;
@@ -69,6 +67,27 @@ public class QuestionController {
         if (tags != null) {
             question.setTags(GSON.toJson(tags));
         }
+        String title = questionAddRequest.getTitle();
+        String content = questionAddRequest.getContent();
+        String answer = questionAddRequest.getAnswer();
+        List<JudgeCase> judgeCase = questionAddRequest.getJudgeCase();
+        JudgeConfig judgeConfig = questionAddRequest.getJudgeConfig();
+
+        question.setTitle(title);
+        question.setContent(content);
+        question.setAnswer(answer);
+        if(judgeCase!=null){
+            question.setJudgeCase(GSON.toJson(judgeCase));
+        }
+        if(judgeConfig!=null){
+            question.setJudgeConfig(GSON.toJson(judgeConfig));
+
+        }
+
+
+
+
+
         // 验证题目信息的有效性
         questionService.validQuestion(question, true);
         // 获取登录用户信息，并设置到题目对象中
@@ -77,6 +96,7 @@ public class QuestionController {
         // 初始化题目的点赞和收藏数
         question.setFavourNum(0);
         question.setThumbNum(0);
+
         // 保存题目到数据库
         boolean result = questionService.save(question);
         // 根据保存结果，抛出相应的业务异常
@@ -131,6 +151,25 @@ public class QuestionController {
         if (tags != null) {
             question.setTags(GSON.toJson(tags));
         }
+
+
+        String title = questionUpdateRequest.getTitle();
+        String content = questionUpdateRequest.getContent();
+        String answer = questionUpdateRequest.getAnswer();
+        List<JudgeCase> judgeCase = questionUpdateRequest.getJudgeCase();
+        JudgeConfig judgeConfig = questionUpdateRequest.getJudgeConfig();
+
+        question.setTitle(title);
+        question.setContent(content);
+        question.setAnswer(answer);
+        if(judgeCase!=null){
+            question.setJudgeCase(GSON.toJson(judgeCase));
+        }
+        if(judgeConfig!=null){
+            question.setJudgeConfig(GSON.toJson(judgeConfig));
+
+        }
+
         // 参数校验
         questionService.validQuestion(question, false);
         long id = questionUpdateRequest.getId();
@@ -142,7 +181,7 @@ public class QuestionController {
     }
 
     /**
-     * 根据 id 获取
+     * 根据 题目id 获取
      *
      * @param id
      * @return
@@ -158,6 +197,25 @@ public class QuestionController {
         }
         return ResultUtils.success(questionService.getQuestionVO(question, request));
     }
+
+    /**
+     * 分页获取用户列表（仅管理员）
+     *
+     * @param userQueryRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/list/page")
+    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
+    public BaseResponse<Page<Question>> listQuestionByPage(@RequestBody QuestionQueryRequest questionQueryRequest,
+                                                   HttpServletRequest request) {
+        long current = questionQueryRequest.getCurrent();
+        long size = questionQueryRequest.getPageSize();
+        Page<Question> questionPage = questionService.page(new Page<>(current, size),
+                questionService.getQueryWrapper(questionQueryRequest));
+        return ResultUtils.success(questionPage);
+    }
+
 
     /**
      * 分页获取列表（封装类）
@@ -221,6 +279,24 @@ public class QuestionController {
         if (tags != null) {
             question.setTags(GSON.toJson(tags));
         }
+
+        String title = questionEditRequest.getTitle();
+        String content = questionEditRequest.getContent();
+        String answer = questionEditRequest.getAnswer();
+        List<JudgeCase> judgeCase = questionEditRequest.getJudgeCase();
+        JudgeConfig judgeConfig = questionEditRequest.getJudgeConfig();
+
+        question.setTitle(title);
+        question.setContent(content);
+        question.setAnswer(answer);
+        if(judgeCase!=null){
+            question.setJudgeCase(GSON.toJson(judgeCase));
+        }
+        if(judgeConfig!=null){
+            question.setJudgeConfig(GSON.toJson(judgeConfig));
+
+        }
+
         // 参数校验
         questionService.validQuestion(question, false);
         User loginUser = userService.getLoginUser(request);
@@ -235,5 +311,6 @@ public class QuestionController {
         boolean result = questionService.updateById(question);
         return ResultUtils.success(result);
     }
+
 
 }

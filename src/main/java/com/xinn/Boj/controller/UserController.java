@@ -259,7 +259,7 @@ public class UserController {
     }
 
     /**
-     * 分页获取用户封装列表
+     * 分页获取用户封装列表（脱敏）
      *
      * @param userQueryRequest
      * @param request
