@@ -151,7 +151,7 @@ public class UserController {
     // region 增删改查
 
     /**
-     * 创建用户
+     * 管理员添加用户
      *
      * @param userAddRequest
      * @param request

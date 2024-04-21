@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -181,7 +182,7 @@ public class QuestionController {
     }
 
     /**
-     * 根据 题目id 获取
+     * 根据题目id获取题目封装类
      *
      * @param id
      * @return
@@ -197,6 +198,25 @@ public class QuestionController {
         }
         return ResultUtils.success(questionService.getQuestionVO(question, request));
     }
+
+    /**
+     * 根据 id 获取题目信息（仅管理员）
+     *
+     * @param id
+     * @param request
+     * @return
+     */
+    @GetMapping("/get")
+    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
+    public BaseResponse<Question> getQuestionById(long id, HttpServletRequest request) {
+        if (id <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Question question = questionService.getById(id);
+        ThrowUtils.throwIf(question == null, ErrorCode.NOT_FOUND_ERROR);
+        return ResultUtils.success(question);
+    }
+
 
     /**
      * 分页获取用户列表（仅管理员）

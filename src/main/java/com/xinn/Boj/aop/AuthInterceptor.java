@@ -9,6 +9,8 @@ import com.xinn.Boj.service.UserService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -63,6 +65,7 @@ public class AuthInterceptor {
                 }
             }
         }
+
         // 通过权限校验，放行
         return joinPoint.proceed();
     }
