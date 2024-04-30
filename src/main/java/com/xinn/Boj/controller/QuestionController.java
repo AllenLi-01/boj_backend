@@ -233,9 +233,9 @@ public class QuestionController {
         long size = questionQueryRequest.getPageSize();
         Page<Question> questionPage = questionService.page(new Page<>(current, size),
                 questionService.getQueryWrapper(questionQueryRequest));
+
         return ResultUtils.success(questionPage);
     }
-
 
     /**
      * 分页获取列表（封装类）
