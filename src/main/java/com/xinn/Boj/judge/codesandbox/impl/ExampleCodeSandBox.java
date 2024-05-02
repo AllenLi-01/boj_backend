@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- * 示例代码沙箱
+ * 代码沙箱（示例）
  */
 public class ExampleCodeSandBox implements CodeSandBox {
     private static final Logger log = LoggerFactory.getLogger(ExampleCodeSandBox.class);
@@ -29,7 +29,7 @@ public class ExampleCodeSandBox implements CodeSandBox {
         ExecuteCodeResponse executeCodeResponse = new ExecuteCodeResponse();
         executeCodeResponse.setOutputList(inputList);
         JudgeInfo judgeInfo = new JudgeInfo();
-        judgeInfo.setMessage(JudgeInfoMessageEnum.AC.getText());
+        judgeInfo.setMessage(JudgeInfoMessageEnum.AC.getValue());
         judgeInfo.setTime(100L);
         judgeInfo.setMemory(100L);
         executeCodeResponse.setJudgeInfo(judgeInfo);
