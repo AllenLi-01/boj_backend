@@ -3,7 +3,7 @@ package com.xinn.Boj.judge.strategy;
 import cn.hutool.json.JSONUtil;
 import com.xinn.Boj.model.dto.question.JudgeCase;
 import com.xinn.Boj.model.dto.question.JudgeConfig;
-import com.xinn.Boj.model.dto.questionsubmit.JudgeInfo;
+import com.xinn.Boj.judge.codesandbox.model.JudgeInfo;
 import com.xinn.Boj.model.entity.Question;
 import com.xinn.Boj.model.enums.JudgeInfoMessageEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,6 @@ public class DefaultJudgeStrategy implements JudgeStrategy {
 
         if(outputList.size() != inputList.size()){
             judgeInfoMessage = JudgeInfoMessageEnum.WA;
-            log.info("Output list size not compared");
             judgeInfoResponse.setMessage(judgeInfoMessage.getValue());
             return judgeInfoResponse;
         }

@@ -2,7 +2,7 @@ package com.xinn.Boj.model.vo;
 
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.*;
-import com.xinn.Boj.model.dto.questionsubmit.JudgeInfo;
+import com.xinn.Boj.judge.codesandbox.model.JudgeInfo;
 import com.xinn.Boj.model.entity.QuestionSubmit;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;

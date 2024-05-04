@@ -1,7 +1,7 @@
 package com.xinn.Boj.judge.strategy;
 
 import com.xinn.Boj.model.dto.question.JudgeCase;
-import com.xinn.Boj.model.dto.questionsubmit.JudgeInfo;
+import com.xinn.Boj.judge.codesandbox.model.JudgeInfo;
 import com.xinn.Boj.model.entity.Question;
 import com.xinn.Boj.model.entity.QuestionSubmit;
 import lombok.Data;

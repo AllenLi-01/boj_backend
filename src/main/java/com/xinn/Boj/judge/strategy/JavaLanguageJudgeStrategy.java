@@ -3,7 +3,7 @@ package com.xinn.Boj.judge.strategy;
 import cn.hutool.json.JSONUtil;
 import com.xinn.Boj.model.dto.question.JudgeCase;
 import com.xinn.Boj.model.dto.question.JudgeConfig;
-import com.xinn.Boj.model.dto.questionsubmit.JudgeInfo;
+import com.xinn.Boj.judge.codesandbox.model.JudgeInfo;
 import com.xinn.Boj.model.entity.Question;
 import com.xinn.Boj.model.enums.JudgeInfoMessageEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 
 /**
- * 默认判题策略
+ * java判题策略
  */
 @Slf4j
 public class JavaLanguageJudgeStrategy implements JudgeStrategy {
